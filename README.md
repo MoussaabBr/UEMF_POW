@@ -1,5 +1,6 @@
 # UEMF PROOF OF WORK BLOCKCHAIN
 
+**Authors**: Benmaamar Moussaab & Dghoghi Adam
 
 ## Overview
 
@@ -268,5 +269,4 @@ The project includes comprehensive testing capabilities:
 
 ---
 
-**Author**: Benmaamar Moussaab  
-**Project**: UEMF Proof-of-Work Blockchain Implementation
+ 
