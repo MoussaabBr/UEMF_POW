@@ -20,12 +20,25 @@ tabs.forEach(({ btn, section }) => {
 
 document.getElementById('tab-blockchain').classList.add('active');
 
-// Fetch and display blockchain
+// Fetch and display blockchain (minimal list + details on click)
 async function loadBlockchain() {
     const res = await fetch('/blocks');
     const chain = await res.json();
-    document.getElementById('blockchain-list').innerHTML =
-        '<pre>' + JSON.stringify(chain, null, 2) + '</pre>';
+    const blockList = document.getElementById('block-list');
+    const blockDetails = document.getElementById('block-details');
+    blockList.innerHTML = '';
+    blockDetails.style.display = 'none';
+    // Minimal list: show block height and hash
+    chain.forEach((block, idx) => {
+        const li = document.createElement('li');
+        li.textContent = `Block #${block.height} (hash: ${block.hash.slice(0, 10)}...)`;
+        li.style.cursor = 'pointer';
+        li.onclick = () => {
+            blockDetails.style.display = 'block';
+            blockDetails.innerHTML = `<h3>Block #${block.height}</h3><pre>${JSON.stringify(block, null, 2)}</pre>`;
+        };
+        blockList.appendChild(li);
+    });
 }
 
 // Fetch and display mempool
@@ -36,13 +49,40 @@ async function loadMempool() {
         '<pre>' + JSON.stringify(mempool, null, 2) + '</pre>';
 }
 
-// Fetch and display wallets
+// Fetch and display wallets (minimal list + details on click + search)
+let allWallets = [];
 async function loadWallets() {
     const res = await fetch('/wallets');
-    const wallets = await res.json();
-    document.getElementById('wallets-list').innerHTML =
-        '<pre>' + JSON.stringify(wallets, null, 2) + '</pre>';
+    allWallets = await res.json();
+    renderWalletList(allWallets);
 }
+
+function renderWalletList(wallets) {
+    const walletList = document.getElementById('wallet-list');
+    const walletDetails = document.getElementById('wallet-details');
+    walletList.innerHTML = '';
+    walletDetails.style.display = 'none';
+    wallets.forEach(wallet => {
+        const li = document.createElement('li');
+        li.textContent = `${wallet.pkey.slice(0, 10)}... (balance: ${wallet.solde})`;
+        li.style.cursor = 'pointer';
+        li.onclick = () => {
+            walletDetails.style.display = 'block';
+            walletDetails.innerHTML = `<h3>Wallet</h3><pre>${JSON.stringify(wallet, null, 2)}</pre>`;
+        };
+        walletList.appendChild(li);
+    });
+}
+
+document.getElementById('wallet-search').addEventListener('input', function() {
+    const query = this.value.trim().toLowerCase();
+    if (!query) {
+        renderWalletList(allWallets);
+        return;
+    }
+    const filtered = allWallets.filter(w => w.pkey.toLowerCase().includes(query));
+    renderWalletList(filtered);
+});
 
 // Handle transaction form submission
 const txForm = document.getElementById('transaction-form');
@@ -68,9 +108,11 @@ txForm.addEventListener('submit', async (e) => {
             loadMempool();
         } else {
             resultDiv.textContent = data.error || 'Error submitting transaction.';
+            resultDiv.style.color = 'red';
         }
     } catch (err) {
         resultDiv.textContent = 'Network error.';
+        resultDiv.style.color = 'red';
     }
 });
 
@@ -156,13 +198,22 @@ async function mineBlock() {
         const miner = 'miner_' + Math.random().toString(36).slice(2, 10);
         const latest = chain[chain.length - 1];
         // Block params (match backend logic)
-        const difficulty = latest.difficulty || 6;
+        const difficulty = latest.difficulty || 6; // Default to 6 if not specified
         const blockReward = latest.blockReward || 50;
         const height = latest.height + 1;
         const previousHash = latest.hash;
         const timestamp = Date.now();
-        const transactions = mempool;
+        // Add mining reward transaction
+        const rewardTx = {
+            sender: 'SYSTEM',
+            receiver: miner,
+            amount: blockReward,
+            fees: 0,
+            signature: 'reward'
+        };
+        const transactions = [rewardTx, ...mempool];
         let nonce = 0;
+        let startTime = Date.now();
         // Build block object
         let hash = '';
         // Simple PoW: hash must start with N zeros
@@ -171,9 +222,15 @@ async function mineBlock() {
             hash = await digestSHA256(blockData);
             if (hash.startsWith('0'.repeat(difficulty))) break;
             nonce++;
-            // For UI responsiveness, yield every 10000 tries
-            if (nonce % 10000 === 0) await new Promise(r => setTimeout(r, 1));
+            // For UI responsiveness, yield and update progress every 1000 tries
+            if (nonce % 1000 === 0) {
+                const elapsed = (Date.now() - startTime) / 1000;
+                const hashRate = Math.round(nonce / elapsed);
+                mineResult.textContent = `Mining... (${nonce} hashes tried, ${hashRate} hashes/sec)`;
+                await new Promise(r => setTimeout(r, 1));
+            }
         }
+        mineResult.textContent = 'Found valid hash! Submitting block...';
         // Submit block
         const block = { height, previousHash, timestamp, difficulty, blockReward, miner, transactions, nonce, hash };
         const res = await fetch('/mine', {
@@ -183,7 +240,8 @@ async function mineBlock() {
         });
         const data = await res.json();
         if (res.ok) {
-            mineResult.textContent = data.message;
+            const elapsed = (Date.now() - startTime) / 1000;
+            mineResult.textContent = `${data.message} (took ${elapsed.toFixed(1)} seconds)`;
             loadBlockchain();
             loadMempool();
             loadWallets();

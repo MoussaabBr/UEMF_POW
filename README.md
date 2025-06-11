@@ -1,13 +1,26 @@
 # UEMF PROOF OF WORK BLOCKCHAIN
 
-**Authors**: Benmaamar Moussaab & Dghoghi Adam
+**Authors**: Benmaamar Moussaab
 
 ## Overview
 
 In this project, we will create a local blockchain that mimics a simplified proof-of-work (PoW) system using Node.js. This will provide us with hands-on experience in blockchain fundamentals, including block generation, transaction management, proof-of-work consensus, and wallet security. We will also build a web interface to visualize the blockchain, mempool, and to interact with transactions.
 
+## Recent Updates (2024)
 
-## Features
+- **Wallet balances (solde) never go below 0**: All wallet logic (backend and frontend) ensures balances cannot be negative. Transactions that would result in a negative balance are rejected.
+- **Mining difficulty is set to 6 everywhere**: The default and genesis block difficulty is 6, and the frontend mining logic matches this.
+- **Modern, card-based UI**: The web interface now features:
+  - Minimal block and wallet lists (as cards)
+  - Click to view block or wallet details in a styled card
+  - Wallet search bar for easy lookup by public key
+  - Responsive, visually appealing design
+- **Mining and wallet logic are in sync**: The frontend and backend use the same difficulty and wallet update rules.
+- **Simple, educational design**: The project is intentionally kept simple for learning and demonstration. Advanced features (like signature verification and strict transaction validation) can be added later.
+- **Improved user experience**: The UI is more interactive, easier to use, and visually modern.
+- **Extensible**: The codebase is ready for future enhancements, such as advanced validation, signature checks, or analytics.
+
+## FEATURES
 
 - **Core Models**: Block, Blockchain, Wallet, and Transaction classes
 - **Persistence Layer**: File-based storage for blocks, blockchain, wallets, and mempool
@@ -29,9 +42,6 @@ Defines the structure and behavior of individual blocks in the blockchain.
   - `calculateHash()`: Computes SHA-256 hash of block contents
   - `addTransaction(transaction)`: Adds transactions and recalculates hash
 
-<p align="center">
-  <img src="./media/block.js.png" alt="Block Model Implementation" width="700">
-</p>
 
 #### Blockchain (`models/blockchain.js`)
 Manages the chain of blocks and provides methods for blockchain operations.
@@ -42,20 +52,12 @@ Manages the chain of blocks and provides methods for blockchain operations.
   - `getLatestBlock()`: Returns the most recent block
   - `addBlock(newBlock)`: Adds new blocks to the chain
 
-<p align="center">
-  <img src="./media/blockchain.js.png" alt="Blockchain Model Implementation" width="700">
-</p>
-
 #### Transaction (`models/transaction.js`)
 Represents transactions between wallets with digital signature support.
 - **Properties**: `sender`, `receiver`, `amount`, `fees`, `signature`, `mempool`, `block`
 - **Key Methods**:
   - `constructor(...)`: Initializes a transaction
   - `sign(privateKey)`: Signs transactions using HMAC-SHA256
-
-<p align="center">
-  <img src="./media/transaction.js.png" alt="Transaction Model Implementation" width="700">
-</p>
 
 #### Wallet (`models/wallet.js`)
 Manages user wallets with sending/receiving capabilities and transaction tracking.
@@ -65,10 +67,6 @@ Manages user wallets with sending/receiving capabilities and transaction trackin
   - `static generateKey()`: Generates random wallet keys
   - `send(amount, receiver)`: Sends coins to another wallet
   - `receive(amount, sender)`: Receives coins from another wallet
-
-<p align="center">
-  <img src="./media/wallet.js.png" alt="Wallet Model Implementation" width="700">
-</p>
 
 ### Persistence Layer (`persistence/`)
 
@@ -180,29 +178,9 @@ Stores persistent data as JSON files:
 
 The application provides a comprehensive web interface with multiple tabs:
 
-<div align="center">
-  <img src="./media/interface.png" alt="Blockchain Viewer" width="400">
-</div>
-
-<p align="center">
-  <img src="./media/mempool.png" alt="Mempool" width="800">
-</p>
-
-<p align="center">
-  <img src="./media/new_transa.png" alt="New Transaction" width="800">
-</p>
-
-<p align="center">
-  <img src="./media/wallet_tools.png" alt="Wallet Tools" width="700">
-</p>
-
 ### Mining Process
 When you mine a block:
 1. Click "Mine Block" - mining message appears
-
-<p align="center">
-  <img src="./media/blockchaine_mining.png" alt="MINING PROCESS" width="700">
-</p>
 
 2. Browser performs proof-of-work (CPU intensive)
 3. Mining time varies (seconds to minutes depending on difficulty)

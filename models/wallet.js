@@ -2,9 +2,7 @@ const crypto = require('crypto');
 
 // Wallet class represents a user's wallet for holding and transacting coins
 class Wallet {
-    /**
-     * @param {string} pkey - Public key (address) of the wallet
-     */
+   
     constructor(pkey = "") {
         this.pkey = pkey || Wallet.generateKey(); // Wallet address
         this.solde = 0; // Balance
@@ -22,6 +20,7 @@ class Wallet {
     send(amount, receiver) {
         if (this.solde < amount) throw new Error('Insufficient balance');
         this.solde -= amount;
+        if (this.solde < 0) this.solde = 0;
         this.sentTransactions.push({ amount, receiver });
     }
 

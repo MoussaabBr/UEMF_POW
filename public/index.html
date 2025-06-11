@@ -19,22 +19,33 @@
     </header>
     <main>
         <section id="section-blockchain" class="tab-section">
-            <h2>Blockchain</h2>
-            <button id="mine-block-btn">Mine Block</button>
-            <div id="mine-result"></div>
-            <div id="blockchain-list"></div>
+            <div class="section-header">
+                <h2>Blockchain</h2>
+                <button id="mine-block-btn" class="primary-btn">Mine Block</button>
+            </div>
+            <div id="mine-result" class="status-message"></div>
+            <div class="card-list-container">
+                <ul id="block-list" class="card-list"></ul>
+                <div id="block-details" class="details-card" style="display:none;"></div>
+            </div>
         </section>
         <section id="section-mempool" class="tab-section" style="display:none;">
             <h2>Mempool (Pending Transactions)</h2>
             <div id="mempool-list"></div>
         </section>
         <section id="section-wallets" class="tab-section" style="display:none;">
-            <h2>Wallet Balances</h2>
-            <div id="wallets-list"></div>
+            <div class="section-header">
+                <h2>Wallet Balances</h2>
+                <input type="text" id="wallet-search" class="search-bar" placeholder="Search by public key...">
+            </div>
+            <div class="card-list-container">
+                <ul id="wallet-list" class="card-list"></ul>
+                <div id="wallet-details" class="details-card" style="display:none;"></div>
+            </div>
         </section>
         <section id="section-transaction" class="tab-section" style="display:none;">
             <h2>Submit New Transaction</h2>
-            <form id="transaction-form">
+            <form id="transaction-form" class="form-card">
                 <label>Sender Public Key:<br><input type="text" id="tx-sender" required></label><br>
                 <label>Receiver Public Key:<br><input type="text" id="tx-receiver" required></label><br>
                 <label>Amount:<br><input type="number" id="tx-amount" min="0" step="any" required></label><br>
@@ -46,10 +57,10 @@
         </section>
         <section id="section-wallet-tools" class="tab-section" style="display:none;">
             <h2>Wallet Tools</h2>
-            <button id="generate-wallet-btn">Generate Wallet</button>
+            <button id="generate-wallet-btn" class="primary-btn">Generate Wallet</button>
             <div id="wallet-info" style="margin:1em 0;"></div>
             <h3>Sign Transaction</h3>
-            <form id="sign-form">
+            <form id="sign-form" class="form-card">
                 <label>Private Key:<br><input type="text" id="sign-privkey" required></label><br>
                 <label>Sender:<br><input type="text" id="sign-sender" required></label><br>
                 <label>Receiver:<br><input type="text" id="sign-receiver" required></label><br>
