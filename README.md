@@ -29,7 +29,7 @@ Defines the structure and behavior of individual blocks in the blockchain.
   - `addTransaction(transaction)`: Adds transactions and recalculates hash
 
 <p align="center">
-  <img src="D:\blockchain\uemf pow photos\block.js.png" alt="Block Model Implementation" width="700">
+  <img src="./media/block.js.png" alt="Block Model Implementation" width="700">
 </p>
 
 #### Blockchain (`models/blockchain.js`)
@@ -42,7 +42,7 @@ Manages the chain of blocks and provides methods for blockchain operations.
   - `addBlock(newBlock)`: Adds new blocks to the chain
 
 <p align="center">
-  <img src="D:\blockchain\uemf pow photos\blockchain.js.png" alt="Blockchain Model Implementation" width="700">
+  <img src="./media/blockchain.js.png" alt="Blockchain Model Implementation" width="700">
 </p>
 
 #### Transaction (`models/transaction.js`)
@@ -53,7 +53,7 @@ Represents transactions between wallets with digital signature support.
   - `sign(privateKey)`: Signs transactions using HMAC-SHA256
 
 <p align="center">
-  <img src="D:\blockchain\uemf pow photos\transaction.js.png" alt="Transaction Model Implementation" width="700">
+  <img src="./media/transaction.js.png" alt="Transaction Model Implementation" width="700">
 </p>
 
 #### Wallet (`models/wallet.js`)
@@ -66,7 +66,7 @@ Manages user wallets with sending/receiving capabilities and transaction trackin
   - `receive(amount, sender)`: Receives coins from another wallet
 
 <p align="center">
-  <img src="D:\blockchain\uemf pow photos\wallet.js.png" alt="Wallet Model Implementation" width="700">
+  <img src="./media/wallet.js.png" alt="Wallet Model Implementation" width="700">
 </p>
 
 ### Persistence Layer (`persistence/`)
@@ -180,19 +180,19 @@ Stores persistent data as JSON files:
 The application provides a comprehensive web interface with multiple tabs:
 
 <div align="center">
-  <img src="D:\blockchain\uemf pow photos\interface.png" alt="Blockchain Viewer" width="400">
+  <img src="./media/interface.png" alt="Blockchain Viewer" width="400">
 </div>
 
 <p align="center">
-  <img src="D:\blockchain\uemf pow photos\mempool.png" alt="Mempool" width="800">
+  <img src="./media/mempool.png" alt="Mempool" width="800">
 </p>
 
 <p align="center">
-  <img src="D:\blockchain\uemf pow photos\new_transa.png" alt="New Transaction" width="800">
+  <img src="./media/new_transa.png" alt="New Transaction" width="800">
 </p>
 
 <p align="center">
-  <img src="D:\blockchain\uemf pow photos\wallet_tools.png" alt="Wallet Tools" width="700">
+  <img src="./media/wallet_tools.png" alt="Wallet Tools" width="700">
 </p>
 
 ### Mining Process
@@ -200,7 +200,7 @@ When you mine a block:
 1. Click "Mine Block" - mining message appears
 
 <p align="center">
-  <img src="D:\blockchain\uemf pow photos\blockchaine_mining.png" alt="MINING PROCESS" width="700">
+  <img src="./media/blockchaine_mining.png" alt="MINING PROCESS" width="700">
 </p>
 
 2. Browser performs proof-of-work (CPU intensive)
