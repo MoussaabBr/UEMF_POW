@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UEMF Proof-of-Work Blockchain</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>UEMF Proof-of-Work Blockchain</h1>
+        <nav>
+            <button id="tab-blockchain">Blockchain</button>
+            <button id="tab-mempool">Mempool</button>
+            <button id="tab-wallets">Wallets</button>
+            <button id="tab-transaction">New Transaction</button>
+            <button id="tab-wallet-tools">Wallet Tools</button>
+        </nav>
+    </header>
+    <main>
+        <section id="section-blockchain" class="tab-section">
+            <h2>Blockchain</h2>
+            <button id="mine-block-btn">Mine Block</button>
+            <div id="mine-result"></div>
+            <div id="blockchain-list"></div>
+        </section>
+        <section id="section-mempool" class="tab-section" style="display:none;">
+            <h2>Mempool (Pending Transactions)</h2>
+            <div id="mempool-list"></div>
+        </section>
+        <section id="section-wallets" class="tab-section" style="display:none;">
+            <h2>Wallet Balances</h2>
+            <div id="wallets-list"></div>
+        </section>
+        <section id="section-transaction" class="tab-section" style="display:none;">
+            <h2>Submit New Transaction</h2>
+            <form id="transaction-form">
+                <label>Sender Public Key:<br><input type="text" id="tx-sender" required></label><br>
+                <label>Receiver Public Key:<br><input type="text" id="tx-receiver" required></label><br>
+                <label>Amount:<br><input type="number" id="tx-amount" min="0" step="any" required></label><br>
+                <label>Fees:<br><input type="number" id="tx-fees" min="0" step="any" value="0"></label><br>
+                <label>Signature:<br><input type="text" id="tx-signature" required></label><br>
+                <button type="submit">Submit Transaction</button>
+            </form>
+            <div id="tx-result"></div>
+        </section>
+        <section id="section-wallet-tools" class="tab-section" style="display:none;">
+            <h2>Wallet Tools</h2>
+            <button id="generate-wallet-btn">Generate Wallet</button>
+            <div id="wallet-info" style="margin:1em 0;"></div>
+            <h3>Sign Transaction</h3>
+            <form id="sign-form">
+                <label>Private Key:<br><input type="text" id="sign-privkey" required></label><br>
+                <label>Sender:<br><input type="text" id="sign-sender" required></label><br>
+                <label>Receiver:<br><input type="text" id="sign-receiver" required></label><br>
+                <label>Amount:<br><input type="number" id="sign-amount" min="0" step="any" required></label><br>
+                <label>Fees:<br><input type="number" id="sign-fees" min="0" step="any" value="0"></label><br>
+                <button type="submit">Sign Transaction</button>
+            </form>
+            <div id="sign-result"></div>
+        </section>
+    </main>
+    <script src="app.js"></script>
+</body>
+</html> 

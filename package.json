@@ -1,0 +1,17 @@
+{
+  "name": "uemf_proof_of_work_blockchain",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "node test.js"
+  },
+  "keywords": [],
+  "author": "Your Name",
+  "license": "ISC",
+  "description": "A simple but robust proof-of-work blockchain implementation.",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "express": "^5.1.0"
+  }
+}
