@@ -26,8 +26,8 @@ A simple local blockchain with proof-of-work, wallet management, transaction poo
 ├── persistence/      # Data persistence logic
 ├── database/         # JSON data storage
 │   ├── blockchain.json  # Blockchain config
-│   ├── wallet.json      # Wallets (default: [])
-│   └── mempool.json     # Mempool (default: [])
+│   ├── wallet.json      # Wallets
+│   └── mempool.json     # Mempool 
 ├── public/           # Web UI
 ├── server.js         # Main server
 ```
