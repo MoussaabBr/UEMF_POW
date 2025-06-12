@@ -1,0 +1,21 @@
+{
+  "height": 1,
+  "previousHash": "835a20c5b9949037cb453852cd9446170a0944fa147d4e7eee787cc22be8ebb2",
+  "timestamp": 1749687964514,
+  "difficulty": 4,
+  "blockReward": 50,
+  "miner": "miner_kutxis6k",
+  "transactions": [
+    {
+      "sender": "SYSTEM",
+      "receiver": "miner_kutxis6k",
+      "amount": 50,
+      "fees": 0,
+      "signature": "reward"
+    }
+  ],
+  "nonce": 3195,
+  "hash": "fc1e7910ae54441411c69b973c3db55ad377276976278f0889d9b26bc575cab0",
+  "blockchain": null,
+  "previousBlock": null
+}

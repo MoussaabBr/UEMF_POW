@@ -1,0 +1,21 @@
+{
+  "height": 2,
+  "previousHash": "fc1e7910ae54441411c69b973c3db55ad377276976278f0889d9b26bc575cab0",
+  "timestamp": 1749687967330,
+  "difficulty": 4,
+  "blockReward": 50,
+  "miner": "miner_pk4nke1l",
+  "transactions": [
+    {
+      "sender": "SYSTEM",
+      "receiver": "miner_pk4nke1l",
+      "amount": 50,
+      "fees": 0,
+      "signature": "reward"
+    }
+  ],
+  "nonce": 12416,
+  "hash": "0000520a4eef89177528bf4d2062365c9f6dc9287e5e52a946cf7725faeb082a",
+  "blockchain": null,
+  "previousBlock": null
+}
